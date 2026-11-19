@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- EDIT PAGE TITLE (Appears in browser tab) -->
+    <title>Josh &amp; Tony's Husband's Eve | Dec 31, 2026</title>
+
+    <!-- Google Fonts: Cinzel (Elegant Serif) & Montserrat (Clean Sans-Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'moss-dark': '#0c241a',
+                        'moss': '#113224',
+                        'moss-light': '#194432',
+                        'gold': '#d4af37',
+                        'gold-light': '#e8cc78',
+                        'gold-cream': '#f5ebd1',
+                    },
+                    fontFamily: {
+                        'serif': ['Cinzel', 'Georgia', 'serif'],
+                        'sans': ['Montserrat', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- html2canvas CDN (Powers the "Save Schedule as Image" button) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        /* Smooth scroll & scroll-snapping container */
+        html {
+            scroll-behavior: smooth;
+            background-color: #0c241a;
+        }
+
+        body {
+            background-color: #113224;
+            color: #f5ebd1;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Proximity snapping: snaps cleanly between sections while allowing taller
+           mobile sections to scroll naturally without cutting off any text */
+        .snap-wrapper {
+            scroll-snap-type: y proximity;
+        }
+
+        .snap-section {
+            scroll-snap-align: start;
+            min-height: 100svh;
+            position: relative;
+        }
+
+        /* Metallic Gold Text Gradient */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #f5ebd1 0%, #e8cc78 35%, #d4af37 70%, #b88f22 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Unified Action Button Style (Get Directions, View Menu, Add to Calendar) */
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.25rem;
+            border: 1px solid rgba(212, 175, 55, 0.75);
+            border-radius: 9999px;
+            background: rgba(12, 36, 26, 0.72);
+            color: #e8cc78;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            white-space: nowrap;
+        }
+
+        .btn-action:hover,
+        .btn-action:focus-visible {
+            background: linear-gradient(135deg, #e8cc78, #d4af37);
+            color: #0c241a;
+            border-color: #f5ebd1;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.28);
+            transform: translateY(-1px);
+            outline: none;
+        }
+
+        /* Calendar Dropdown Menu */
+        .cal-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .cal-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            min-width: 230px;
+            background: #0c241a;
+            border: 1px solid #d4af37;
+            border-radius: 0.875rem;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(232, 204, 120, 0.15);
+            padding: 0.4rem;
+            z-index: 60;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+        }
+
+        .cal-dropdown-wrapper.open .cal-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .cal-option {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            border-radius: 0.5rem;
+            color: #f5ebd1;
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-align: left;
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .cal-option:hover {
+            background: rgba(212, 175, 55, 0.16);
+            color: #e8cc78;
+        }
+
+        /* Framed Couple Photo */
+        .photo-frame {
+            border: 2px solid rgba(212, 175, 55, 0.75);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 0 4px rgba(17, 50, 36, 0.6);
+            border-radius: 1rem;
+            overflow: hidden;
+            background-color: #0c241a;
+        }
+
+        /* Info Card Panel (Borderless 2-Column Details Grid) */
+        .details-panel {
+            background: rgba(12, 36, 26, 0.62);
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            border-radius: 1.25rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Subtle Bounce for Scroll Cue */
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(7px); }
+        }
+
+        .animate-gentle-bounce {
+            animation: gentleBounce 2.2s ease-in-out infinite;
+        }
+
+        /* Floating Navigation Dots */
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            border: 1.5px solid rgba(232, 204, 120, 0.6);
+            background: transparent;
+            transition: all 0.25s ease;
+        }
+
+        .nav-dot.active {
+            background: #e8cc78;
+            border-color: #f5ebd1;
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.65);
+        }
+
+        /* Toast Notification */
+        #toast-notification {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #0c241a;
+            color: #f5ebd1;
+            border: 1px solid #d4af37;
+            padding: 0.75rem 1.35rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            max-width: 90vw;
+            text-align: center;
+        }
+
+        #toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Decorative Gold Divider */
+        .gold-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.65), transparent);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-moss-dark">
+
+    <!-- ================= FLOATING SIDE NAVIGATION DOTS ================= -->
+    <nav aria-label="Page sections" class="fixed right-3 sm:right-5 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-3.5">
+        <a href="#hero" class="nav-dot active" data-section="hero" title="Welcome" aria-label="Jump to Welcome"></a>
+        <a href="#ceremony" class="nav-dot" data-section="ceremony" title="4:00 PM Ceremony" aria-label="Jump to Ceremony"></a>
+        <a href="#dinner" class="nav-dot" data-section="dinner" title="5:30 PM Dinner" aria-label="Jump to Dinner"></a>
+        <a href="#party" class="nav-dot" data-section="party" title="8:00 PM NYE Party" aria-label="Jump to NYE Party"></a>
+        <a href="#info" class="nav-dot" data-section="info" title="Good to Know" aria-label="Jump to Good to Know"></a>
+    </nav>
+
+    <!-- Main Scroll-Snapping Content -->
+    <main class="snap-wrapper">
+
+        <!-- ================= SECTION 1: HERO / TITLE PAGE ================= -->
+        <section id="hero" class="snap-section flex flex-col items-center justify-center px-6 py-16 text-center overflow-x-clip">
+
+            <!-- IMAGE PATH: Full-bleed engagement photo background -->
+            <div class="absolute inset-0 z-0 bg-moss-dark">
+                <img
+                    src="images/engagement.jpg"
+                    alt="Josh and Tony engagement photo"
+                    class="w-full h-full object-cover object-center"
+                    onerror="this.style.display='none'"
+                >
+                <!-- Rich Oak-Moss Dark Gradient Overlay for crisp text readability -->
+                <div class="absolute inset-0 bg-gradient-to-b from-moss-dark/75 via-moss/65 to-moss-dark/95"></div>
+            </div>
+
+            <!-- Subtle Decorative Corner Gold Sparkles -->
+            <svg class="pointer-events-none absolute top-8 left-6 w-20 h-20 text-gold opacity-25 z-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M50 10 L53 45 L88 50 L53 55 L50 90 L47 55 L12 50 L47 45 Z" />
+                <circle cx="80" cy="22" r="2.5" fill="currentColor" />
+                <circle cx="22" cy="78" r="1.8" fill="currentColor" />
+            </svg>
+            <svg class="pointer-events-none absolute top-10 right-8 w-16 h-16 text-gold opacity-20 z-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M50 18 L52 47 L80 50 L52 53 L50 82 L48 53 L20 50 L48 47 Z" />
+            </svg>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
+                <!-- EDIT TEXT HERE: Event Date Eyebrow -->
+                <p class="text-xs sm:text-sm font-semibold tracking-[0.28em] uppercase text-gold-light mb-5">
+                    Thursday, December 31, 2026
+                </p>
+
+                <div class="gold-divider w-36 mb-6"></div>
+
+                <!-- EDIT TEXT HERE: Main Event Title -->
+                <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-wide text-gold-gradient drop-shadow-lg mb-6">
+                    Josh &amp; Tony's<br>Husband's Eve
+                </h1>
+
+                <div class="gold-divider w-36 mb-7"></div>
+
+                <!-- EDIT TEXT HERE: Subtitle / Welcome Summary -->
+                <p class="text-gold-cream/95 text-sm sm:text-base md:text-lg leading-relaxed font-light max-w-xl bg-moss-dark/45 backdrop-blur-sm px-6 py-5 rounded-2xl border border-gold/20 shadow-xl">
+                    From the Arctic to the Jungle, our adventure continues. We invite you to be with us as we tie the knot, pop the champagne for the New Year, and celebrate the start of our next chapter.
+                </p>
+            </div>
+
+            <!-- Scroll Cue -->
+            <a href="#ceremony" class="relative z-10 mt-12 sm:mt-16 flex flex-col items-center text-gold-light/90 hover:text-gold-cream transition-colors animate-gentle-bounce">
+                <span class="text-[11px] sm:text-xs font-medium tracking-[0.22em] uppercase mb-2">Scroll for the Schedule</span>
+                <span class="text-lg leading-none" aria-hidden="true">&darr;</span>
+            </a>
+        </section>
+
+        <!-- ================= SECTION 2: CEREMONY & PICTURES ================= -->
+        <section id="ceremony" class="snap-section flex flex-col items-center justify-center px-5 sm:px-8 py-16 border-t border-gold/25 overflow-x-clip">
+
+            <!-- IMAGE PATH: Jordan's Jungle interior background -->
+            <div class="absolute inset-0 z-0 bg-moss">
+                <img
+                    src="images/jordans-jungle-bg.jpg"
+                    alt="Jordan's Jungle interior"
+                    class="w-full h-full object-cover object-center opacity-30"
+                    onerror="this.style.display='none'"
+                >
+                <div class="absolute inset-0 bg-gradient-to-b from-moss-dark/90 via-moss/85 to-moss-dark/95"></div>
+            </div>
+
+            <div class="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
+
+                <!-- EDIT TEXT HERE: Ceremony Time & Title -->
+                <p class="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-gold-light mb-2">
+                    4:00 PM
+                </p>
+                <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-gold-gradient mb-3">
+                    Ceremony &amp; Pictures
+                </h2>
+
+                <!-- EDIT TEXT HERE: Ceremony Venue & Address -->
+                <p class="text-lg sm:text-xl font-medium text-gold-cream tracking-wide">
+                    Jordan's Jungle
+                </p>
+                <p class="text-xs sm:text-sm text-gold-cream/75 mt-1 mb-6">
+                    545 Pawtucket Ave, Pawtucket, RI 02860
+                </p>
+
+                <!-- Action Buttons Row -->
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+                    <!-- Get Directions Link -->
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=Jordan%27s+Jungle+545+Pawtucket+Ave+Pawtucket+RI+02860"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-action"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.75-5.625-6.75-11.25a6.75 6.75 0 1113.5 0C18.75 15.375 12 21 12 21z"/>
+                            <circle cx="12" cy="9.75" r="2.25"/>
+                        </svg>
+                        Get Directions
+                    </a>
+
+                    <!-- Universal Add to Calendar Dropdown -->
+                    <div class="cal-dropdown-wrapper">
+                        <button type="button" class="btn-action cal-toggle-btn" data-event="ceremony" aria-expanded="false">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                            Add to Calendar
+                        </button>
+                        <div class="cal-dropdown-menu" role="menu"></div>
+                    </div>
+                </div>
+
+                <!-- IMAGE PATH: Optional framed couple photo (auto-hides cleanly if file is not uploaded) -->
+                <div class="photo-frame w-full max-w-xs sm:max-w-sm aspect-[4/3] mb-8">
+                    <img
+                        src="images/ceremony-couple.jpg"
+                        alt="Josh and Tony"
+                        class="w-full h-full object-cover"
+                        onerror="this.parentElement.style.display='none'"
+                    >
+                </div>
+
+                <!-- 2-Column Borderless Info Grid -->
+                <div class="details-panel w-full p-6 sm:p-8 text-left">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                        <!-- EDIT TEXT HERE: Ceremony Details -->
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">The Plan</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Quick, relaxed ceremony followed by family photos. No getting ready, first looks, speeches, or special dances.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Arrival Time</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Please arrive by 3:45 PM so we can kick things off right at 4:00 PM.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Attire</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Smart casual / NYE festive&mdash;come comfortable and ready to celebrate.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Drinks</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                We'll have a cooler of drinks on hand to enjoy during photos.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Seating</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Seating is provided by Jordan's Jungle for the ceremony.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Arriving</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Located inside a large historic mill building with multiple businesses. Park in the main lot and follow signs for Jordan's Jungle.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 3: DINNER ================= -->
+        <section id="dinner" class="snap-section flex flex-col items-center justify-center px-5 sm:px-8 py-16 bg-gradient-to-b from-moss-dark via-moss to-moss-dark border-t border-gold/25 overflow-x-clip">
+
+            <div class="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
+
+                <!-- EDIT TEXT HERE: Dinner Time & Title -->
+                <p class="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-gold-light mb-2">
+                    5:30 PM
+                </p>
+                <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-gold-gradient mb-3">
+                    Dinner
+                </h2>
+
+                <!-- EDIT TEXT HERE: Dinner Venue & Subtext -->
+                <p class="text-lg sm:text-xl font-medium text-gold-cream tracking-wide">
+                    Location TBD
+                </p>
+                <p class="text-xs sm:text-sm text-gold-cream/75 mt-1 mb-6">
+                    Details &amp; menu to follow
+                </p>
+
+                <!-- Action Buttons Row -->
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+                    <!-- REPLACE # WITH GOOGLE MAPS LINK -->
+                    <a
+                        href="#"
+                        data-tbd-message="Dinner location coming soon!"
+                        class="btn-action tbd-link"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.75-5.625-6.75-11.25a6.75 6.75 0 1113.5 0C18.75 15.375 12 21 12 21z"/>
+                            <circle cx="12" cy="9.75" r="2.25"/>
+                        </svg>
+                        Get Directions
+                    </a>
+
+                    <!-- REPLACE # WITH MENU LINK -->
+                    <a
+                        href="#"
+                        data-tbd-message="Menu link coming soon!"
+                        class="btn-action tbd-link"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10"/>
+                        </svg>
+                        View Menu
+                    </a>
+
+                    <!-- Universal Add to Calendar Dropdown -->
+                    <div class="cal-dropdown-wrapper">
+                        <button type="button" class="btn-action cal-toggle-btn" data-event="dinner" aria-expanded="false">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                            Add to Calendar
+                        </button>
+                        <div class="cal-dropdown-menu" role="menu"></div>
+                    </div>
+                </div>
+
+                <!-- IMAGE PATH: Couple in suits at dinner -->
+                <div class="photo-frame w-full max-w-xs sm:max-w-sm aspect-[4/5] sm:aspect-[4/4] mb-8">
+                    <img
+                        src="images/dinner-couple.jpg"
+                        alt="Josh and Tony in suits at dinner"
+                        class="w-full h-full object-cover object-top"
+                        onerror="this.parentElement.style.display='none'"
+                    >
+                </div>
+
+                <!-- 2-Column Borderless Info Grid (No Attire Section) -->
+                <div class="details-panel w-full p-6 sm:p-8 text-left">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                        <!-- EDIT TEXT HERE: Dinner Details -->
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">The Plan</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Details will be shared when ready&mdash;including ordering style, shared apps, or set menu info.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Arrival</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Parking, entrance details, and reservation name will be posted here once finalized.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 4: NEW YEAR'S EVE PARTY ================= -->
+        <section id="party" class="snap-section flex flex-col items-center justify-center px-5 sm:px-8 py-16 bg-moss border-t border-gold/25 overflow-x-clip">
+
+            <!-- Subtle Decorative Gold-Outline NYE Background Motifs (Low Opacity) -->
+            <div class="pointer-events-none absolute inset-0 overflow-hidden z-0" aria-hidden="true">
+                <!-- Top-Left: Firework Burst -->
+                <svg class="absolute top-8 left-4 sm:left-10 w-32 sm:w-44 h-32 sm:h-44 text-gold opacity-[0.15]" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <g stroke-linecap="round">
+                        <line x1="60" y1="60" x2="60" y2="12"/>
+                        <line x1="60" y1="60" x2="60" y2="108"/>
+                        <line x1="60" y1="60" x2="12" y2="60"/>
+                        <line x1="60" y1="60" x2="108" y2="60"/>
+                        <line x1="60" y1="60" x2="26" y2="26"/>
+                        <line x1="60" y1="60" x2="94" y2="94"/>
+                        <line x1="60" y1="60" x2="94" y2="26"/>
+                        <line x1="60" y1="60" x2="26" y2="94"/>
+                        <line x1="60" y1="60" x2="42" y2="18"/>
+                        <line x1="60" y1="60" x2="78" y2="102"/>
+                        <line x1="60" y1="60" x2="102" y2="42"/>
+                        <line x1="60" y1="60" x2="18" y2="78"/>
+                        <circle cx="60" cy="8" r="2" fill="currentColor"/>
+                        <circle cx="112" cy="60" r="2" fill="currentColor"/>
+                        <circle cx="22" cy="22" r="2" fill="currentColor"/>
+                        <circle cx="98" cy="98" r="2" fill="currentColor"/>
+                    </g>
+                </svg>
+
+                <!-- Top-Right: Clinking Champagne Glasses -->
+                <svg class="absolute top-12 right-4 sm:right-12 w-28 sm:w-40 h-28 sm:h-40 text-gold opacity-[0.16]" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Left flute -->
+                    <path d="M28 24 L48 18 L54 54 C55 62 49 69 42 70 C35 71 28 65 27 57 Z"/>
+                    <line x1="42" y1="70" x2="46" y2="98"/>
+                    <line x1="34" y1="100" x2="58" y2="96"/>
+                    <!-- Right flute -->
+                    <path d="M92 24 L72 18 L66 54 C65 62 71 69 78 70 C85 71 92 65 93 57 Z"/>
+                    <line x1="78" y1="70" x2="74" y2="98"/>
+                    <line x1="62" y1="96" x2="86" y2="100"/>
+                    <!-- Clink sparkles -->
+                    <line x1="60" y1="6" x2="60" y2="14"/>
+                    <line x1="51" y1="10" x2="55" y2="15"/>
+                    <line x1="69" y1="10" x2="65" y2="15"/>
+                    <circle cx="60" cy="24" r="1.5" fill="currentColor"/>
+                </svg>
+
+                <!-- Bottom-Left: Popping Champagne Bottle -->
+                <svg class="absolute bottom-10 left-4 sm:left-12 w-28 sm:w-40 h-28 sm:h-40 text-gold opacity-[0.14]" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 86 L46 62 L58 50 L68 34 L76 42 L60 52 L48 64 L34 98 C30 102 22 94 22 86 Z"/>
+                    <line x1="54" y1="54" x2="64" y2="64"/>
+                    <!-- Cork & Bubbles -->
+                    <rect x="78" y="20" width="9" height="6" rx="1.5" transform="rotate(-40 78 20)"/>
+                    <path d="M74 34 C82 26 92 24 100 18"/>
+                    <circle cx="94" cy="34" r="2.2"/>
+                    <circle cx="104" cy="26" r="1.8"/>
+                    <circle cx="88" cy="14" r="1.5" fill="currentColor"/>
+                </svg>
+
+                <!-- Bottom-Right: Party Cups & Stars -->
+                <svg class="absolute bottom-10 right-6 sm:right-14 w-28 sm:w-40 h-28 sm:h-40 text-gold opacity-[0.15]" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Cup 1 -->
+                    <path d="M22 52 L50 52 L45 94 L27 94 Z"/>
+                    <line x1="24" y1="62" x2="48" y2="62"/>
+                    <line x1="25.5" y1="74" x2="46.5" y2="74"/>
+                    <!-- Cup 2 -->
+                    <path d="M58 58 L86 58 L81 100 L63 100 Z"/>
+                    <line x1="60" y1="68" x2="84" y2="68"/>
+                    <line x1="61.5" y1="80" x2="82.5" y2="80"/>
+                    <!-- Ping pong ball & stars -->
+                    <circle cx="56" cy="36" r="6"/>
+                    <path d="M96 22 L98 30 L106 32 L98 34 L96 42 L94 34 L86 32 L94 30 Z"/>
+                    <circle cx="28" cy="30" r="2" fill="currentColor"/>
+                </svg>
+            </div>
+
+            <div class="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
+
+                <!-- EDIT TEXT HERE: Party Time & Title -->
+                <p class="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-gold-light mb-2">
+                    8:00 PM
+                </p>
+                <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-gold-gradient mb-5">
+                    New Year's Eve Party
+                </h2>
+
+                <!-- IMAGE PATH: Fox Knoll Crest (Displayed below time/title and above address) -->
+                <img
+                    src="images/fox-knoll-crest.png"
+                    alt="The Fox Knoll Crest"
+                    class="w-36 sm:w-44 h-auto object-contain mb-4 drop-shadow-xl"
+                    onerror="this.style.display='none'"
+                >
+
+                <!-- EDIT TEXT HERE: Party Address -->
+                <p class="text-sm sm:text-base font-medium text-gold-cream tracking-wide mb-3">
+                    47 Knollwood Ave, Cranston, RI 02910
+                </p>
+
+                <!-- EDIT TEXT HERE: Party Subtitle -->
+                <p class="text-sm sm:text-base italic text-gold-light/90 max-w-lg mb-6 font-light">
+                    Come relax, mingle, play games, and have fun until you can't anymore.
+                </p>
+
+                <!-- Action Buttons Row -->
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+                    <!-- Get Directions Link -->
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=47+Knollwood+Ave,+Cranston,+RI+02910"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-action"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.75-5.625-6.75-11.25a6.75 6.75 0 1113.5 0C18.75 15.375 12 21 12 21z"/>
+                            <circle cx="12" cy="9.75" r="2.25"/>
+                        </svg>
+                        Get Directions
+                    </a>
+
+                    <!-- Universal Add to Calendar Dropdown -->
+                    <div class="cal-dropdown-wrapper">
+                        <button type="button" class="btn-action cal-toggle-btn" data-event="party" aria-expanded="false">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                            Add to Calendar
+                        </button>
+                        <div class="cal-dropdown-menu" role="menu"></div>
+                    </div>
+                </div>
+
+                <!-- IMAGE PATH: Couple in front of the house -->
+                <div class="photo-frame w-full max-w-sm sm:max-w-md aspect-[4/3] mb-8">
+                    <img
+                        src="images/house-couple.jpg"
+                        alt="Josh and Tony in front of The Fox Knoll"
+                        class="w-full h-full object-cover object-center"
+                        onerror="this.parentElement.style.display='none'"
+                    >
+                </div>
+
+                <!-- 2-Column Borderless Info Grid -->
+                <div class="details-panel w-full p-6 sm:p-8 text-left">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                        <!-- EDIT TEXT HERE: Party Details -->
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Attire</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Not formal&mdash;feel free to change into something comfortable.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Arrival</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Uber &amp; Lyft are encouraged. Street parking is available; please let us know if you expect to leave your car overnight so we can plan for you to park in the driveway.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Drinks</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Standard liquors, wine, bubbles, seltzers, and beer will be available. BYOB for anything else you may want.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Food</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Party snacks and late-night hot food will be out and ready for grazing.
+                            </p>
+                        </div>
+                        <div class="sm:col-span-2 pt-4 border-t border-gold/20 sm:text-center">
+                            <h3 class="font-serif text-gold-light text-base tracking-wider uppercase mb-1.5">Midnight</h3>
+                            <p class="text-sm text-gold-cream/90 leading-relaxed font-light">
+                                Champagne toast to close out the year and welcome 2027!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 5: GOOD TO KNOW & SAVE SCHEDULE ================= -->
+        <section id="info" class="snap-section flex flex-col items-center justify-center px-5 sm:px-8 py-16 bg-gradient-to-b from-moss-dark via-moss to-moss-dark border-t border-gold/25 overflow-x-clip">
+
+            <div class="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center text-center">
+
+                <!-- IMAGE PATH: Couple walking away in alley -->
+                <div class="photo-frame w-full max-w-xs sm:max-w-sm aspect-[3/4] mb-8">
+                    <img
+                        src="images/alley-couple.jpg"
+                        alt="Josh and Tony walking away down a lit cobblestone alley"
+                        class="w-full h-full object-cover object-center"
+                        onerror="this.parentElement.style.display='none'"
+                    >
+                </div>
+
+                <!-- EDIT TEXT HERE: Final Section Header -->
+                <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-gold-gradient mb-6">
+                    Good to Know
+                </h2>
+
+                <!-- EDIT TEXT HERE: Concise Reminders -->
+                <div class="details-panel w-full p-6 sm:p-8 text-left space-y-4 mb-9">
+                    <div class="flex items-start gap-3">
+                        <span class="text-gold mt-1 flex-shrink-0" aria-hidden="true">&#10022;</span>
+                        <p class="text-sm sm:text-base text-gold-cream/90 leading-relaxed font-light">
+                            Transportation between venues is not provided&mdash;Uber &amp; Lyft are encouraged.
+                        </p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-gold mt-1 flex-shrink-0" aria-hidden="true">&#10022;</span>
+                        <p class="text-sm sm:text-base text-gold-cream/90 leading-relaxed font-light">
+                            Need to leave your car at 47 Knollwood Ave overnight? Totally fine&mdash;just give us a heads up for a driveway spot.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Prominent Save Schedule as Image Button -->
+                <button
+                    id="save-schedule-btn"
+                    type="button"
+                    onclick="downloadScheduleImage()"
+                    class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-gold-light via-gold to-gold-light text-moss-dark font-semibold text-xs sm:text-sm tracking-[0.16em] uppercase shadow-xl shadow-black/40 hover:brightness-110 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                    <span id="save-btn-label">Save Schedule as Image</span>
+                </button>
+
+                <p class="text-xs text-gold-cream/55 mt-4 font-light">
+                    Downloads a handy schedule card straight to your phone or computer.
+                </p>
+
+                <!-- Back to Top Link -->
+                <a href="#hero" class="mt-10 text-xs tracking-[0.2em] uppercase text-gold-light/70 hover:text-gold-light transition-colors">
+                    &uarr; Back to Top
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= HIDDEN PRINTABLE SCHEDULE CARD (FOR IMAGE DOWNLOAD) ================= -->
+    <!-- Positioned off-screen so html2canvas captures a crisp, 800px-wide vertical card (No Fox Knoll crest) -->
+    <div
+        id="printable-schedule-card"
+        style="position: fixed; left: -9999px; top: 0; width: 800px; background: #113224; color: #f5ebd1; padding: 48px; font-family: 'Montserrat', sans-serif; box-sizing: border-box;"
+    >
+        <div style="border: 3px solid #d4af37; padding: 44px 48px; position: relative; background: linear-gradient(180deg, #0c241a 0%, #113224 50%, #0c241a 100%);">
+            <!-- Inner Thin Border -->
+            <div style="position: absolute; inset: 10px; border: 1px solid rgba(212, 175, 55, 0.45); pointer-events: none;"></div>
+
+            <!-- Decorative Top Stars / Fireworks SVG -->
+            <svg style="position: absolute; top: 24px; left: 26px; width: 92px; height: 92px; opacity: 0.35;" viewBox="0 0 100 100" fill="none" stroke="#e8cc78" stroke-width="1.3">
+                <line x1="50" y1="50" x2="50" y2="10"/>
+                <line x1="50" y1="50" x2="50" y2="90"/>
+                <line x1="50" y1="50" x2="10" y2="50"/>
+                <line x1="50" y1="50" x2="90" y2="50"/>
+                <line x1="50" y1="50" x2="22" y2="22"/>
+                <line x1="50" y1="50" x2="78" y2="78"/>
+                <line x1="50" y1="50" x2="78" y2="22"/>
+                <line x1="50" y1="50" x2="22" y2="78"/>
+                <circle cx="50" cy="8" r="2" fill="#e8cc78"/>
+                <circle cx="92" cy="50" r="2" fill="#e8cc78"/>
+            </svg>
+            <svg style="position: absolute; top: 24px; right: 26px; width: 92px; height: 92px; opacity: 0.35;" viewBox="0 0 100 100" fill="none" stroke="#e8cc78" stroke-width="1.3">
+                <line x1="50" y1="50" x2="50" y2="10"/>
+                <line x1="50" y1="50" x2="50" y2="90"/>
+                <line x1="50" y1="50" x2="10" y2="50"/>
+                <line x1="50" y1="50" x2="90" y2="50"/>
+                <line x1="50" y1="50" x2="22" y2="22"/>
+                <line x1="50" y1="50" x2="78" y2="78"/>
+                <line x1="50" y1="50" x2="78" y2="22"/>
+                <line x1="50" y1="50" x2="22" y2="78"/>
+                <circle cx="50" cy="8" r="2" fill="#e8cc78"/>
+                <circle cx="8" cy="50" r="2" fill="#e8cc78"/>
+            </svg>
+
+            <!-- Header -->
+            <div style="text-align: center; position: relative; z-index: 2;">
+                <p style="font-size: 14px; letter-spacing: 0.28em; text-transform: uppercase; color: #e8cc78; margin: 0 0 12px 0; font-weight: 600;">
+                    Thursday, December 31, 2026
+                </p>
+                <h1 style="font-family: 'Cinzel', Georgia, serif; font-size: 46px; font-weight: 700; color: #e8cc78; line-height: 1.18; margin: 0 0 18px 0;">
+                    Josh &amp; Tony's<br>Husband's Eve
+                </h1>
+                <div style="height: 1px; width: 200px; margin: 0 auto 20px auto; background: #d4af37;"></div>
+                <p style="font-size: 15px; line-height: 1.65; color: #f5ebd1; max-width: 560px; margin: 0 auto 36px auto; font-weight: 300;">
+                    From the Arctic to the Jungle, our adventure continues. Join us for a quick, casual ceremony, dinner, and a New Year's Eve celebration!
+                </p>
+            </div>
+
+            <!-- Schedule Title -->
+            <div style="text-align: center; margin-bottom: 24px;">
+                <h2 style="font-family: 'Cinzel', Georgia, serif; font-size: 22px; letter-spacing: 0.16em; text-transform: uppercase; color: #d4af37; margin: 0;">
+                    Schedule of Events
+                </h2>
+            </div>
+
+            <!-- 3 Schedule Items -->
+            <div style="display: flex; flex-direction: column; gap: 22px; margin-bottom: 36px; padding: 0 12px;">
+                <div style="border-left: 3px solid #d4af37; padding-left: 20px;">
+                    <p style="font-family: 'Cinzel', Georgia, serif; font-size: 22px; color: #e8cc78; margin: 0 0 4px 0; font-weight: 600;">
+                        4:00 PM &nbsp;|&nbsp; Ceremony &amp; Pictures
+                    </p>
+                    <p style="font-size: 15px; color: #f5ebd1; margin: 0 0 4px 0; font-weight: 500;">
+                        Jordan's Jungle &mdash; 545 Pawtucket Ave, Pawtucket, RI 02860
+                    </p>
+                    <p style="font-size: 13px; color: rgba(245, 235, 209, 0.8); margin: 0;">
+                        Please arrive by 3:45 PM. Seating &amp; cooler of drinks provided.
+                    </p>
+                </div>
+
+                <div style="border-left: 3px solid #d4af37; padding-left: 20px;">
+                    <p style="font-family: 'Cinzel', Georgia, serif; font-size: 22px; color: #e8cc78; margin: 0 0 4px 0; font-weight: 600;">
+                        5:30 PM &nbsp;|&nbsp; Dinner
+                    </p>
+                    <p style="font-size: 15px; color: #f5ebd1; margin: 0 0 4px 0; font-weight: 500;">
+                        Location TBD
+                    </p>
+                    <p style="font-size: 13px; color: rgba(245, 235, 209, 0.8); margin: 0;">
+                        Location, menu, and reservation details to follow.
+                    </p>
+                </div>
+
+                <div style="border-left: 3px solid #d4af37; padding-left: 20px;">
+                    <p style="font-family: 'Cinzel', Georgia, serif; font-size: 22px; color: #e8cc78; margin: 0 0 4px 0; font-weight: 600;">
+                        8:00 PM &nbsp;|&nbsp; New Year's Eve Party
+                    </p>
+                    <p style="font-size: 15px; color: #f5ebd1; margin: 0 0 4px 0; font-weight: 500;">
+                        47 Knollwood Ave, Cranston, RI 02910
+                    </p>
+                    <p style="font-size: 13px; color: rgba(245, 235, 209, 0.8); margin: 0;">
+                        Casual attire, games, drinks (BYOB welcome), snacks, late-night food &amp; midnight toast!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Good to Know Box -->
+            <div style="border: 1px solid rgba(212, 175, 55, 0.5); background: rgba(12, 36, 26, 0.65); padding: 24px 28px; border-radius: 12px;">
+                <h3 style="font-family: 'Cinzel', Georgia, serif; font-size: 18px; letter-spacing: 0.14em; text-transform: uppercase; color: #e8cc78; margin: 0 0 12px 0; text-align: center;">
+                    Good to Know
+                </h3>
+                <p style="font-size: 14px; line-height: 1.6; color: #f5ebd1; margin: 0 0 8px 0;">
+                    &#10022; &nbsp;Transportation between venues is not provided&mdash;Uber &amp; Lyft are encouraged.
+                </p>
+                <p style="font-size: 14px; line-height: 1.6; color: #f5ebd1; margin: 0;">
+                    &#10022; &nbsp;Need to leave your car at 47 Knollwood Ave overnight? Totally fine&mdash;just let us know so we can save a driveway spot.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification (No alert() dialogs) -->
+    <div id="toast-notification" role="status" aria-live="polite"></div>
+
+    <!-- ================= JAVASCRIPT: CALENDAR, TOAST, NAV DOTS & IMAGE DOWNLOAD ================= -->
+    <script>
+        /* =====================================================================
+           EVENT DATA FOR UNIVERSAL "ADD TO CALENDAR" BUTTONS
+           (Update Dinner location/details here once finalized!)
+           ===================================================================== */
+        const CALENDAR_EVENTS = {
+            ceremony: {
+                title: "Josh & Tony's Ceremony & Pictures",
+                location: "Jordan's Jungle, 545 Pawtucket Ave, Pawtucket, RI 02860",
+                description: "Quick, relaxed mini-wedding ceremony followed by family photos. Please arrive by 3:45 PM. Seating and a cooler of drinks will be provided.",
+                // Local Eastern Time (America/New_York) for .ics
+                startLocal: "20261231T160000",
+                endLocal:   "20261231T171500",
+                // UTC equivalents (EST = UTC-5) for Google & Yahoo links
+                startUTC:   "20261231T210000Z",
+                endUTC:     "20261231T221500Z",
+                filename:   "Josh-Tony-Ceremony.ics"
+            },
+            dinner: {
+                title: "Josh & Tony's Wedding Dinner",
+                location: "Location TBD",
+                description: "Family celebration dinner following the ceremony. Location, menu, and reservation details to follow!",
+                startLocal: "20261231T173000",
+                endLocal:   "20261231T194500",
+                startUTC:   "20261231T223000Z",
+                endUTC:     "20270101T004500Z",
+                filename:   "Josh-Tony-Dinner.ics"
+            },
+            party: {
+                title: "Josh & Tony's New Year's Eve Party",
+                location: "The Fox Knoll, 47 Knollwood Ave, Cranston, RI 02910",
+                description: "Come relax, mingle, play games, and ring in 2027! Casual attire. Standard drinks, snacks, late-night hot food, and midnight champagne toast provided (BYOB welcome). Uber/Lyft encouraged.",
+                startLocal: "20261231T200000",
+                endLocal:   "20270101T010000",
+                startUTC:   "20270101T010000Z",
+                endUTC:     "20270101T060000Z",
+                filename:   "Josh-Tony-NYE-Party.ics"
+            }
+        };
+
+        /* ----- Toast Notification Helper ----- */
+        let toastTimer = null;
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3200);
+        }
+
+        /* ----- Escape text safely for ICS format ----- */
+        function escapeICS(text) {
+            return String(text)
+                .replace(/\\/g, "\\\\")
+                .replace(/\n/g, "\\n")
+                .replace(/,/g, "\\,")
+                .replace(/;/g, "\\;");
+        }
+
+        /* ----- Generate & Download a valid .ics file in America/New_York ----- */
+        function downloadICS(eventKey) {
+            const ev = CALENDAR_EVENTS[eventKey];
+            if (!ev) return;
+
+            const uid = `${eventKey}-20261231@joshandtony-husbandseve`;
+            const dtstamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+            const icsLines = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Josh & Tony//Husbands Eve 2026//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'BEGIN:VTIMEZONE',
+                'TZID:America/New_York',
+                'BEGIN:STANDARD',
+                'DTSTART:19701101T020000',
+                'RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU',
+                'TZOFFSETFROM:-0400',
+                'TZOFFSETTO:-0500',
+                'TZNAME:EST',
+                'END:STANDARD',
+                'BEGIN:DAYLIGHT',
+                'DTSTART:19700308T020000',
+                'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU',
+                'TZOFFSETFROM:-0500',
+                'TZOFFSETTO:-0400',
+                'TZNAME:EDT',
+                'END:DAYLIGHT',
+                'END:VTIMEZONE',
+                'BEGIN:VEVENT',
+                `UID:${uid}`,
+                `DTSTAMP:${dtstamp}`,
+                `DTSTART;TZID=America/New_York:${ev.startLocal}`,
+                `DTEND;TZID=America/New_York:${ev.endLocal}`,
+                `SUMMARY:${escapeICS(ev.title)}`,
+                `DESCRIPTION:${escapeICS(ev.description)}`,
+                `LOCATION:${escapeICS(ev.location)}`,
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ];
+
+            const blob = new Blob([icsLines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = ev.filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+            showToast('Calendar file (.ics) downloaded!');
+        }
+
+        /* ----- Build Google Calendar URL ----- */
+        function buildGoogleCalUrl(ev) {
+            const params = new URLSearchParams({
+                action: 'TEMPLATE',
+                text: ev.title,
+                dates: `${ev.startUTC}/${ev.endUTC}`,
+                details: ev.description,
+                location: ev.location,
+                ctz: 'America/New_York'
+            });
+            return `https://calendar.google.com/calendar/render?${params.toString()}`;
+        }
+
+        /* ----- Build Yahoo Calendar URL ----- */
+        function buildYahooCalUrl(ev) {
+            const params = new URLSearchParams({
+                v: '60',
+                title: ev.title,
+                st: ev.startUTC,
+                et: ev.endUTC,
+                desc: ev.description,
+                in_loc: ev.location
+            });
+            return `https://calendar.yahoo.com/?${params.toString()}`;
+        }
+
+        /* ----- Close All Open Calendar Dropdowns ----- */
+        function closeAllCalendarMenus() {
+            document.querySelectorAll('.cal-dropdown-wrapper.open').forEach(wrapper => {
+                wrapper.classList.remove('open');
+                const btn = wrapper.querySelector('.cal-toggle-btn');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        /* ----- Initialize Calendar Dropdowns, TBD Links & Floating Nav Dots ----- */
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Populate each Add to Calendar dropdown menu
+            document.querySelectorAll('.cal-dropdown-wrapper').forEach(wrapper => {
+                const toggleBtn = wrapper.querySelector('.cal-toggle-btn');
+                const menu = wrapper.querySelector('.cal-dropdown-menu');
+                const eventKey = toggleBtn ? toggleBtn.dataset.event : null;
+                const ev = CALENDAR_EVENTS[eventKey];
+
+                if (!ev || !menu) return;
+
+                const googleUrl = buildGoogleCalUrl(ev);
+                const yahooUrl = buildYahooCalUrl(ev);
+
+                menu.innerHTML = `
+                    <a href="${googleUrl}" target="_blank" rel="noopener noreferrer" class="cal-option" role="menuitem">
+                        <span aria-hidden="true">&#128197;</span>
+                        <span>Google Calendar</span>
+                    </a>
+                    <button type="button" class="cal-option ics-download-btn" data-event="${eventKey}" role="menuitem">
+                        <span aria-hidden="true">&#127822;</span>
+                        <span>Apple / Outlook (.ics)</span>
+                    </button>
+                    <a href="${yahooUrl}" target="_blank" rel="noopener noreferrer" class="cal-option" role="menuitem">
+                        <span aria-hidden="true">&#128231;</span>
+                        <span>Yahoo Calendar</span>
+                    </a>
+                `;
+
+                // Toggle open/close on button click
+                toggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isCurrentlyOpen = wrapper.classList.contains('open');
+                    closeAllCalendarMenus();
+                    if (!isCurrentlyOpen) {
+                        wrapper.classList.add('open');
+                        toggleBtn.setAttribute('aria-expanded', 'true');
+                    }
+                });
+
+                // Wire up .ics download option
+                const icsBtn = menu.querySelector('.ics-download-btn');
+                if (icsBtn) {
+                    icsBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        downloadICS(eventKey);
+                        closeAllCalendarMenus();
+                    });
+                }
+
+                // Close menu when selecting external links
+                menu.querySelectorAll('a').forEach(a => {
+                    a.addEventListener('click', () => closeAllCalendarMenus());
+                });
+            });
+
+            // Close dropdowns when clicking outside or pressing Escape
+            document.addEventListener('click', closeAllCalendarMenus);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeAllCalendarMenus();
+            });
+
+            // 2. Handle TBD Dinner links gracefully when href is still "#"
+            document.querySelectorAll('.tbd-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.getAttribute('href') === '#') {
+                        e.preventDefault();
+                        showToast(link.dataset.tbdMessage || 'Details coming soon!');
+                    }
+                });
+            });
+
+            // 3. Highlight active floating navigation dot as user scrolls
+            const sections = document.querySelectorAll('section[id]');
+            const navDots = document.querySelectorAll('.nav-dot');
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const activeId = entry.target.id;
+                            navDots.forEach(dot => {
+                                dot.classList.toggle('active', dot.dataset.section === activeId);
+                            });
+                        }
+                    });
+                }, { threshold: 0.45 });
+
+                sections.forEach(section => observer.observe(section));
+            }
+        });
+
+        /* ----- Download High-Res Printable Schedule Card via html2canvas ----- */
+        async function downloadScheduleImage() {
+            const btn = document.getElementById('save-schedule-btn');
+            const label = document.getElementById('save-btn-label');
+            const card = document.getElementById('printable-schedule-card');
+
+            if (!card || typeof html2canvas === 'undefined') {
+                showToast('Unable to generate image right now. Please take a screenshot.');
+                return;
+            }
+
+            try {
+                btn.disabled = true;
+                label.textContent = 'Generating Image...';
+
+                // Wait for web fonts to finish loading for crisp typography
+                if (document.fonts && document.fonts.ready) {
+                    await document.fonts.ready;
+                }
+
+                const canvas = await html2canvas(card, {
+                    scale: 2,
+                    backgroundColor: '#113224',
+                    useCORS: true,
+                    logging: false
+                });
+
+                const imageUrl = canvas.toDataURL('image/png', 1.0);
+                const downloadLink = document.createElement('a');
+                downloadLink.download = 'Josh-Tony-Husbands-Eve-Schedule.png';
+                downloadLink.href = imageUrl;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+
+                showToast('Schedule saved to your device!');
+            } catch (error) {
+                console.error('Error generating schedule image:', error);
+                showToast('Could not save image automatically. Feel free to take a screenshot!');
+            } finally {
+                btn.disabled = false;
+                label.textContent = 'Save Schedule as Image';
+            }
+        }
+    </script>
+</body>
+</html>
